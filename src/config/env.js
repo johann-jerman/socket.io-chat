@@ -3,5 +3,6 @@ config()
 
 export const {
     PORT,
-    ENV
+    ENV,
+    ORIGIN
 } = process.env

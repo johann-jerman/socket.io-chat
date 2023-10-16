@@ -10,7 +10,7 @@ export default class Users {
         return user;
     }
     getUser(id){
-        return this.users.filter(user => user.id == id)[0] || false;
+        return this.users?.filter(user => user.id == id)[0] || false;
     }
     getUserList(){
 

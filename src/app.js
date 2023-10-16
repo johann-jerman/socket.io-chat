@@ -1,16 +1,15 @@
 import express from 'express';
 import http from "http";
 import cors from "cors";
-import { ENV, PORT } from './config/env.js';
+import { ENV, ORIGIN, PORT } from './config/env.js';
 import { Server } from "socket.io";
 import Users from './helpers/Users.js';
-import { log } from 'console';
 
 const app = express();
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ORIGIN,
   },
   
 });
@@ -64,10 +63,9 @@ io.on('connection', (socket)=>{
     let {tateti, y, x, turn} = game
     tateti[y][x] = turn
     let userSocket = user.getUser(socket.id)
-    if(userSocket) {
+    if(!userSocket) {
       //emitis el error de que no existe el socket
     }
-    console.log(game);
     io.to(userSocket.room).emit('game', game)
   })
 
